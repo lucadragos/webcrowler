@@ -3,11 +3,15 @@ package dragos.webcrowler.sitemap;
 import java.util.ArrayList;
 import java.util.List;
 
+import dragos.webcrowler.exceptions.AppException;
+
 public class TNode {
+    private static final String EMPTY_NODE_MSG = "Node can not be empty";
     private List<TNode> children;
     private String link;
 
     public TNode(String link) {
+        checkLinkIsNotEmpty(link);
         this.link = link;
         children = new ArrayList<>();
     }
@@ -26,7 +30,7 @@ public class TNode {
 
     @Override
     public boolean equals(Object object) {
-        boolean result = true;
+        boolean result;
         if (!(object instanceof TNode)) {
             result = false;
         } else {
@@ -35,5 +39,11 @@ public class TNode {
         }
 
         return result;
+    }
+
+    private void checkLinkIsNotEmpty(String link) {
+        if (link == null || link.trim().isEmpty()) {
+            throw new AppException(EMPTY_NODE_MSG);
+        }
     }
 }

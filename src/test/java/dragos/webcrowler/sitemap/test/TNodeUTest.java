@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
+import dragos.webcrowler.exceptions.AppException;
 import dragos.webcrowler.sitemap.TNode;
 import org.junit.Test;
 
@@ -50,5 +51,23 @@ public class TNodeUTest {
 
         assertThat(tNode1.getChildren().size(), equalTo(expectedSize));
         assertThat(tNode1.getChildren(), hasItem(tNode2));
+    }
+
+    @Test(expected = AppException.class)
+    public void checkExceptionIsThrownIfLinkIsEmpty() {
+        String emptyString = "";
+        TNode node = new TNode(emptyString);
+    }
+
+    @Test(expected = AppException.class)
+    public void checkExceptionIsThrownIfLinkIsWhiteSpacesOnly() {
+        String emptyString = " ";
+        TNode node = new TNode(emptyString);
+    }
+
+    @Test(expected = AppException.class)
+    public void checkExceptionIsThrownIfLinkIsNull() {
+        String nullLink = null;
+        TNode node = new TNode(nullLink);
     }
 }
