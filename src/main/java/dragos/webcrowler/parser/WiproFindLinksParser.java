@@ -9,20 +9,22 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class WiproFindLinksParser {
-    public static final String HTTP = "http";
-    public static final String WIPRODIGITAL = "wiprodigital.com";
-    public static final String HREF = "href";
-    public static final String A_HREF = "a[href]";
-    public static final String IGNORING_EMPTY_LINK = "Ignoring empty link";
-    public static final String HASHTAG = "#";
-    public static final String UNABLE_TO_VISIT_NODE = "Unable to visit node";
-    public static final String FORWARDS_SLASH = "/";
+    private static final String HTTP = "http";
+    private static final String WIPRODIGITAL = "wiprodigital.com";
+    private static final String HREF = "href";
+    private static final String A_HREF = "a[href]";
+    private static final String IGNORING_EMPTY_LINK = "Ignoring empty link";
+    private static final String HASHTAG = "#";
+    private static final String UNABLE_TO_VISIT_NODE = "Unable to visit node";
+    private static final String FORWARDS_SLASH = "/";
+    private static final String IMG_SRC = "img[src]";
+    private static final String SRC = "src";
 
     public static void findLinks(String rootLink, TNode node) {
         if (node.canVisit()) {
             try {
-                if (isValidLink(node)) {
-                    //TODO: to remove content
+                if (isValidLink(node.getLink())) {
+                    //TODO: to remove
                     System.out.println(node.getLink());
 
                     String linkToVisit;
@@ -42,6 +44,10 @@ public class WiproFindLinksParser {
                             System.out.println(IGNORING_EMPTY_LINK);
                         }
                     }
+                    Elements images = document.select(IMG_SRC);
+                    for (Element image : images) {
+                        node.addChild(new TNode(image.attr(SRC), false));
+                    }
                 }
             } catch (IOException e) {
                 System.out.println(UNABLE_TO_VISIT_NODE);
@@ -49,9 +55,8 @@ public class WiproFindLinksParser {
         }
     }
 
-    public static boolean isValidLink(TNode node) {
+    public static boolean isValidLink(String link) {
         boolean canBeVisited = false;
-        String link = node.getLink();
         if (link.startsWith(HASHTAG)) {
             return false;
         }
