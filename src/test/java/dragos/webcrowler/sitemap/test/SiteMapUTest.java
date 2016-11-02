@@ -1,5 +1,7 @@
 package dragos.webcrowler.sitemap.test;
 
+import static java.lang.Boolean.TRUE;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.hasItems;
 
@@ -21,29 +23,29 @@ public class SiteMapUTest {
     }
 
     @Test
-    public void checkExplorationIsNotAddingDuplicateNodes() {
-        TNode root = new TNode("1");
-        TNode sTNode1 = new TNode("2");
-        TNode sTNode2 = new TNode("3");
-        TNode ssTnode3 = new TNode("4");
-
-        root.addChild(sTNode1);
-        root.addChild(sTNode2);
-        sTNode2.addChild(ssTnode3);
-        ssTnode3.addChild(sTNode1);
-
-
-        final List<TNode> processedLinks = new ArrayList<>();
-
+    public void checkMapIsUsingTheMapOperation() {
+        final Flag flag =new Flag();
+        TNode root = new TNode("1", false);
         SiteMap siteMap = new SiteMap(root);
 
         siteMap.exploreMap(new MapOperation() {
             @Override
             public void processNode(TNode node) {
-                processedLinks.add(node);
+                flag.setFlag(true);
             }
         });
 
-        assertThat(processedLinks, hasItems(root,sTNode1,sTNode2,ssTnode3));
+        assertThat(flag.getFlag(),is(TRUE));
+    }
+
+    class Flag {
+        boolean flag;
+
+        public boolean getFlag() {
+            return flag;
+        }
+        public void setFlag(boolean flag) {
+            this.flag = flag;
+        }
     }
 }

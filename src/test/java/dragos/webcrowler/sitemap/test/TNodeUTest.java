@@ -1,5 +1,6 @@
 package dragos.webcrowler.sitemap.test;
 
+import static java.lang.Boolean.FALSE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
@@ -14,8 +15,8 @@ public class TNodeUTest {
     @Test
     public void checkThat2NodesWithTheSameLinkAreEquals() {
         String dummyLink = "dummyLink";
-        TNode tNode1 = new TNode(dummyLink);
-        TNode tNode2 = new TNode(dummyLink);
+        TNode tNode1 = new TNode(dummyLink, FALSE);
+        TNode tNode2 = new TNode(dummyLink, FALSE);
 
         assertThat(tNode1, equalTo(tNode2));
     }
@@ -24,8 +25,8 @@ public class TNodeUTest {
     public void check2NodesAreDifferentIfTheLinkIsDifferent() {
         String dummyLink = "dummyLink";
         String dummyLink1 = "dummyLink1";
-        TNode tNode1 = new TNode(dummyLink);
-        TNode tNode2 = new TNode(dummyLink1);
+        TNode tNode1 = new TNode(dummyLink, FALSE);
+        TNode tNode2 = new TNode(dummyLink1, FALSE);
 
         assertThat(tNode1, not(equalTo(tNode2)));
     }
@@ -34,7 +35,7 @@ public class TNodeUTest {
     public void equalCheckIsAlwaysIfTheCompareObjectIsNotOfTheSameType() {
         String dummyLink = "dummyLink";
         Object object = new Object();
-        TNode tNode1 = new TNode(dummyLink);
+        TNode tNode1 = new TNode(dummyLink, FALSE);
 
         assertThat(tNode1, not(equalTo(object)));
     }
@@ -44,8 +45,8 @@ public class TNodeUTest {
         int expectedSize = 1;
         String dummyLink = "dummyLink";
         String dummyLink1 = "dummyLink1";
-        TNode tNode1 = new TNode(dummyLink);
-        TNode tNode2 = new TNode(dummyLink1);
+        TNode tNode1 = new TNode(dummyLink, FALSE);
+        TNode tNode2 = new TNode(dummyLink1, FALSE);
 
         tNode1.addChild(tNode2);
 
@@ -56,18 +57,18 @@ public class TNodeUTest {
     @Test(expected = AppException.class)
     public void checkExceptionIsThrownIfLinkIsEmpty() {
         String emptyString = "";
-        TNode node = new TNode(emptyString);
+        TNode node = new TNode(emptyString, FALSE);
     }
 
     @Test(expected = AppException.class)
     public void checkExceptionIsThrownIfLinkIsWhiteSpacesOnly() {
         String emptyString = " ";
-        TNode node = new TNode(emptyString);
+        TNode node = new TNode(emptyString, FALSE);
     }
 
     @Test(expected = AppException.class)
     public void checkExceptionIsThrownIfLinkIsNull() {
         String nullLink = null;
-        TNode node = new TNode(nullLink);
+        TNode node = new TNode(nullLink, FALSE);
     }
 }

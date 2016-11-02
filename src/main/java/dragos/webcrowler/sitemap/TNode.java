@@ -9,15 +9,21 @@ public class TNode {
     private static final String EMPTY_NODE_MSG = "Node can not be empty";
     private List<TNode> children;
     private String link;
+    private boolean canVisit;
 
-    public TNode(String link) {
+    public TNode(String link, boolean canVisit) {
         checkLinkIsNotEmpty(link);
         this.link = link;
         children = new ArrayList<>();
+        this.canVisit = canVisit;
     }
 
     public String getLink() {
         return link;
+    }
+
+    public boolean canVisit() {
+        return canVisit;
     }
 
     public void addChild(TNode child) {
