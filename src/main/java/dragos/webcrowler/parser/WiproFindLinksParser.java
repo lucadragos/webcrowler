@@ -24,11 +24,8 @@ public class WiproFindLinksParser {
         if (node.canVisit()) {
             try {
                 if (isValidLink(node.getLink())) {
-                    //TODO: to remove
-                    System.out.println(node.getLink());
-
                     String linkToVisit;
-                    if ( node.getLink().startsWith("/") ) {
+                    if ( node.getLink().startsWith(FORWARDS_SLASH) ) {
                         linkToVisit = rootLink+node.getLink();
                     } else {
                         linkToVisit = node.getLink();

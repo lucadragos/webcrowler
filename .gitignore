@@ -45,8 +45,11 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-#
+# Other ide specifics
 .idea
+.gradle
 webcrowler.iml
 build
+
+!/build/libs/webcrowler-1.0-SNAPSHOT.jar
 

@@ -52,22 +52,22 @@ public class RenderSiteMap implements MapOperation {
         //rendering all nodes except last one
         for (int i = 0; i < node.getChildren().size() - 1; i++) {
             TNode tNode = node.getChildren().get(i);
-            render(tNode, prefix + (isTail ? SPACES : VEERTICAL_LINE), false);
+            render(tNode, prefix + (isTail ? "    " : "│   "), false);
         }
 
         //rendering last node
         if (node.getChildren().size() > 0) {
             TNode child = node.getChildren().get(node.getChildren().size() - 1);
-            render(child, prefix + (isTail ? SPACES : VEERTICAL_LINE), true);
+            render(child, prefix + (isTail ? "    " : "│   "), true);
         }
     }
 
     private void renderToConsole(TNode node, String prefix, boolean isTail) {
-        System.out.println(prefix + (isTail ? TAIL : INNER) + node.getLink());
+        System.out.println(prefix + (isTail ? "└── " : "├── ") + node.getLink());
     }
 
     private void renderToFile(TNode node, String prefix, boolean isTail) throws IOException {
-        bufferedWriter.write(prefix + (isTail ? TAIL : INNER) + node.getLink());
+        bufferedWriter.write(prefix + (isTail ? "└── " : "├── ") + node.getLink());
         bufferedWriter.newLine();
     }
 }
