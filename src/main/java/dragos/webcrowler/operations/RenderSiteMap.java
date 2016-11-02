@@ -13,10 +13,6 @@ import dragos.webcrowler.sitemap.TNode;
 public class RenderSiteMap implements MapOperation {
 
     private static final String UNABLE_TO_RENDER_THE_SITEMAP = "Unable to render the sitemap";
-    public static final String SPACES = "    ";
-    public static final String VEERTICAL_LINE = "│   ";
-    public static final String TAIL = "└── ";
-    public static final String INNER = "├── ";
 
     File file;
     BufferedWriter bufferedWriter;
