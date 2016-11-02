@@ -1,6 +1,6 @@
 package dragos.webcrowler.operations.test;
 
-import dragos.webcrowler.operations.ConsoleRenderMapOperation;
+import dragos.webcrowler.operations.RenderSiteMap;
 import dragos.webcrowler.sitemap.TNode;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class ConsoleRenderMapOperationUTest {
         sTNode2.addChild(ssTnode3);
         ssTnode3.addChild(sTNode1);
 
-        ConsoleRenderMapOperation consoleRender = new ConsoleRenderMapOperation();
+        RenderSiteMap consoleRender = new RenderSiteMap();
         consoleRender.processNode(root);
     }
 }
