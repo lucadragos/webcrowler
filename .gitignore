@@ -48,4 +48,5 @@ fabric.properties
 #
 .idea
 webcrowler.iml
+build
 
